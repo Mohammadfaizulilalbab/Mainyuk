@@ -207,6 +207,17 @@ img {
   width: 100%;
 }
 
+
+/* Remove these from your original CSS */
+/*.card:hover {
+  transform: rotate(-5deg);
+}
+
+.card:hover .outside {
+  transform: rotateY(-130deg);
+}*/
+
+/* Your other CSS remains the same */
 @media (min-width: 600px) {
   .column {
     width: 50%;
