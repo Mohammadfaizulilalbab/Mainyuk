@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yes</title>
+    <style>
+    .back {
+      position: fixed;
+      padding: 0;
+      margin: 0;
+      top: 30;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      background: white;
+      animation-name: backdiv;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+    }
+    
+    h1 {
+      position: absolute;
+      margin: 200px auto auto;
+      top: 400px;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 50px;
+      width: fit-content;
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      color: #ff4d8d;
+    }
+  
+    .heart-container {
+      position: absolute;
+      margin: auto;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 400px;
+      height: 400px;
+      animation: beat 1s infinite;
+    }
+
+    .heart-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      z-index: 1000;
+    }
+
+
+
+    
+  
+    @keyframes backdiv {
+      50% {
+        background: rgb(201, 135, 175);
+      }
+    }
+  
+    @keyframes beat {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(0.6);
+        filter: drop-shadow(0 0 10px white);
+      }
+    }
+    
+    .heart-container {
+      filter: drop-shadow(10px 10px 20px #FF6347);
+    }
+  </style>
+</head>
+<body>
+  <div class="back"></div>
+  <h1>Horeeeeeee kita keluar bareng!!!</h1>
+  <div class="heart-container">
+    <img src="assets\dudujalan.gif" class="heart-img" alt="heart">
+      <path d="M50 90C50 90 87 62 87 35C87 19 74 10 62 10C54 10 50 15 50 15C50 15 46 10 38 10C26 10 13 19 13 35C13 62 50 90 50 90Z" 
+            fill="red"/>
+    </svg>
+  </div>
+  <canvas id="confeti" width="300" height="300" class="active"></canvas>
+  <script src="yes.js"></script>
+</body>
+</html>

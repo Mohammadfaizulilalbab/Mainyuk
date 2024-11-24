@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mau main bareng gk?</title>
+    <link rel="icon" type="image/png" href="src\assets\front-stk.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="src/stylesheet" />
+    <link rel="stylesheet" href="src/style.css" />
+</head>
+<body>
+    <style>
+        body {
+            background-image: url("src/assets/bg.png");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        .front{
+            background-image: url("src/assets/front-bg.png");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100%;
+        }
+    </style>
+    <div class="card">
+        <div class="outside">
+            <div class="front">
+                <div class="hiee">
+                    <p1>Haii manissss!!!</p1>
+                </div>
+                <div class="front-sticker">
+                    <img src="src\assets\dudu.gif" alt="Hiee Pumpkin !!">
+                </div>
+            </div>
+            <div class="back">
+                <div class="back-sticker">
+                    <img src="src\assets\bubu2.gif" alt="Phool !!">
+                </div>
+            </div>
+        </div>
+        <div class="inside">
+            <div class="Text">
+                <p>Mau keluar bareng buat ketemuan gak?</p>
+            </div>
+            <div class="main-sticker">
+                <img src="src\assets\bubu.gif" alt="Wanna Date?">
+            </div>
+            <div class="buttons">
+                <button class="btn" id="yesButton" onclick="nextPage('yes')">Boleh</button>
+                <button class="btn" id="noButton">Gak mau</button>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <a href="https://sendthesong.xyz/details/6728e05a9fa812fb7058bccd">
+            <img src="src\assets\icon.gif" alt="!" height="42">
+        </a>
+    </footer>
+
+    <script>
+        function nextPage(choice) {
+            if (choice === 'yes') {
+                window.location.href = "src/yes.html";
+            }
+        }
+
+        // Add the moving "No" button functionality
+        const noButton = document.getElementById('noButton');
+const card = document.querySelector('.card');
+
+noButton.addEventListener('mouseover', moveButton);
+noButton.addEventListener('click', moveButton);
+
+function moveButton() {
+    // Get the card's bounding rectangle
+    const cardRect = card.getBoundingClientRect();
+    
+    // Define the movement area (relative to the card)
+    const moveArea = {
+        width: 200,  // Width of movement area
+        height: 100  // Height of movement area
+    };
+    
+    // Get the button's original position relative to the card
+    const originalPosition = {
+        x: noButton.offsetLeft,
+        y: noButton.offsetTop
+    };
+    
+    // Calculate boundaries for movement
+    const boundaries = {
+        minX: originalPosition.x - moveArea.width/2,
+        maxX: originalPosition.x + moveArea.width/2,
+        minY: originalPosition.y - moveArea.height/2,
+        maxY: originalPosition.y + moveArea.height/2
+    };
+    
+    // Generate random positions within the defined boundaries
+    const randomX = Math.max(
+        boundaries.minX,
+        Math.min(
+            Math.random() * (boundaries.maxX - boundaries.minX) + boundaries.minX,
+            cardRect.width - noButton.offsetWidth
+        )
+    );
+    
+    const randomY = Math.max(
+        boundaries.minY,
+        Math.min(
+            Math.random() * (boundaries.maxY - boundaries.minY) + boundaries.minY,
+            cardRect.height - noButton.offsetHeight
+        )
+    );
+    
+    // Apply the new position
+    noButton.style.position = 'absolute';
+    noButton.style.left = `${randomX}px`;
+    noButton.style.top = `${randomY}px`;
+    
+    // Prevent default click behavior
+    return false;
+}
+
+// Reset button position when mouse leaves the card
+card.addEventListener('mouseleave', () => {
+    noButton.style.position = 'relative';
+    noButton.style.left = 'auto';
+    noButton.style.top = 'auto';
+});
+    </script>
+</body>
+</html>
