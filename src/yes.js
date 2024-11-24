@@ -1,4 +1,100 @@
 var COLORS, Confetti, NUM_CONFETTI, PI_2, canvas, confetti, context, drawCircle, drawCircle2, drawCircle3, i, range, xpos;
+
+// Add click event listener to the body
+document.body.addEventListener('click', function(e) {
+    const card = document.querySelector('.card');
+    // Only trigger if we're not clicking the buttons
+    if (!e.target.classList.contains('btn')) {
+        card.classList.add('hover');
+    }
+});
+
+// Add hover effect for smoother interaction
+const card = document.querySelector('.card');
+
+// Keep the previous hover styles but modify them to work with class
+const styleSheet = document.createElement('style');
+styleSheet.textContent = `
+    .card.hover {
+        transform: rotate(-5deg);
+    }
+    
+    .card.hover .outside {
+        transform: rotateY(-130deg);
+    }
+`;
+document.head.appendChild(styleSheet);
+
+// Prevent card from closing when clicking inside
+card.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (!e.target.classList.contains('btn')) {
+        this.classList.add('hover');
+    }
+});
+
+// Button movement code remains the same
+const noButton = document.getElementById('noButton');
+
+noButton.addEventListener('mouseover', moveButton);
+noButton.addEventListener('click', moveButton);
+
+function moveButton() {
+    // Get the card's bounding rectangle
+    const cardRect = card.getBoundingClientRect();
+    
+    // Define the movement area (relative to the card)
+    const moveArea = {
+        width: 200,  // Width of movement area
+        height: 100  // Height of movement area
+    };
+    
+    // Get the button's original position relative to the card
+    const originalPosition = {
+        x: noButton.offsetLeft,
+        y: noButton.offsetTop
+    };
+    
+    // Calculate boundaries for movement
+    const boundaries = {
+        minX: originalPosition.x - moveArea.width/2,
+        maxX: originalPosition.x + moveArea.width/2,
+        minY: originalPosition.y - moveArea.height/2,
+        maxY: originalPosition.y + moveArea.height/2
+    };
+    
+    // Generate random positions within the defined boundaries
+    const randomX = Math.max(
+        boundaries.minX,
+        Math.min(
+            Math.random() * (boundaries.maxX - boundaries.minX) + boundaries.minX,
+            cardRect.width - noButton.offsetWidth
+        )
+    );
+    
+    const randomY = Math.max(
+        boundaries.minY,
+        Math.min(
+            Math.random() * (boundaries.maxY - boundaries.minY) + boundaries.minY,
+            cardRect.height - noButton.offsetHeight
+        )
+    );
+    
+    // Apply the new position
+    noButton.style.position = 'absolute';
+    noButton.style.left = `${randomX}px`;
+    noButton.style.top = `${randomY}px`;
+    
+    // Prevent default click behavior
+    return false;
+}
+
+// Reset button position when mouse leaves the card
+card.addEventListener('mouseleave', () => {
+    noButton.style.position = 'relative';
+    noButton.style.left = 'auto';
+    noButton.style.top = 'auto';
+});
  NUM_CONFETTI = 40;
  COLORS = [
    [235, 90, 70],
